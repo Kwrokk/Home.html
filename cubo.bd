@@ -1,0 +1,74 @@
+create schema cubo
+
+use schema cubo
+
+create table usuarios (
+	id_usuario int primary key auto_increment,
+	nome varchar(30) not null, 
+	senha varchar(50) not null,
+	email varchar(50) unique key,
+	escolaridade varchar(30) not null, 
+	data_cadastro timestamp default current_timestamp
+);
+
+create table materias(
+	id_materia int primary key auto_increment,
+	nome varchar(50) not null,
+	descricao text
+);
+
+create table desafios(
+	id_desafio int primary key auto_increment,
+	titulo varchar(50),
+	id_materia int,
+	pontos int,
+	dificuldade enum('Fácil', 'Médio', 'Difícil'),
+	foreign key (id_materia) references materias(id_materia)
+);
+
+create table progresso (
+	id_progresso int primary key auto_increment,
+  id_usuario int, 
+	id_desafio int,
+	compleado boleean, 
+	foreign key (id_usuario) references usuarios(id_usuario),
+	foreign key (id_desafio) references desafios(id_desafio)
+);
+
+create table notificacoes (
+	id_notificacao int primary key auto_increment,
+	id_usuario int, 
+	titulo varchar(100),
+	mensagem text,
+	lida boolean default false,
+  data_envio timestamp default current_timestamp,
+	foreign key (id_usuario) references usuarios(id_usuario)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
