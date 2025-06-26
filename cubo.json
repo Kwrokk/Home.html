@@ -1,0 +1,36 @@
+{
+  "usuarios": {
+    "id_usuario": "int (PK, auto_increment)",
+    "nome": "varchar(30), not null",
+    "senha": "varchar(50), not null",
+    "email": "varchar(50), unique",
+    "escolaridade": "varchar(30), not null",
+    "data_cadastro": "timestamp, default current_timestamp"
+  },
+  "materias": {
+    "id_materia": "int (PK, auto_increment)",
+    "nome": "varchar(50), not null",
+    "descricao": "text"
+  },
+  "desafios": {
+    "id_desafio": "int (PK, auto_increment)",
+    "titulo": "varchar(50)",
+    "id_materia": "int (FK -> materias.id_materia)",
+    "pontos": "int",
+    "dificuldade": "enum('Fácil', 'Médio', 'Difícil')"
+  },
+  "progresso": {
+    "id_progresso": "int (PK, auto_increment)",
+    "id_usuario": "int (FK -> usuarios.id_usuario)",
+    "id_desafio": "int (FK -> desafios.id_desafio)",
+    "completo": "boolean"
+  },
+  "notificacoes": {
+    "id_notificacao": "int (PK, auto_increment)",
+    "id_usuario": "int (FK -> usuarios.id_usuario)",
+    "titulo": "varchar(100)",
+    "mensagem": "text",
+    "lida": "boolean, default false",
+    "data_envio": "timestamp, default current_timestamp"
+  }
+}
